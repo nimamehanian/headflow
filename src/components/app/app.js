@@ -13,9 +13,7 @@ const initialValue = Value.fromJSON({
           {
             object: 'text',
             leaves: [
-              {
-                text: 'A line of text in a paragraph.',
-              },
+              { text: 'A line of text in a paragraph.' },
             ],
           },
         ],
@@ -25,25 +23,33 @@ const initialValue = Value.fromJSON({
 });
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: initialValue,
-    };
-    this.onChange = this.onChange.bind(this);
+  state = {
+    value: initialValue,
+  };
+
+  onChange = ({ value }) => {
+    this.setState({ value });
   }
 
-  onChange({ value }) {
-    this.setState({ value });
+  onKeyDown = (event, change, state) => {
+    switch (event.key) {
+      case 'Tab':
+        event.preventDefault();
+        event.shiftKey ? console.log('OUTDENT') : console.log('INDENT');
+        return state;
+      default:
+        return null;
+    }
   }
 
   render() {
     return (
       <div className="app">
-        YOLO
         <Editor
+          className="editor"
           value={this.state.value}
           onChange={this.onChange}
+          onKeyDown={this.onKeyDown}
         />
       </div>
     );
