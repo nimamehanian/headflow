@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "extends": "airbnb",
   "globals": {
     "document": true,
@@ -40,6 +41,12 @@
       "LabeledStatement",
       "WithStatement"
     ],
+    "object-curly-newline": ["error", {
+        "ObjectExpression": { "minProperties": 6, "consistent": true },
+        "ObjectPattern": { "multiline": true, "minProperties": 6 },
+        "ImportDeclaration": { "minProperties": 6, "consistent": true },
+        "ExportDeclaration": { "multiline": true, "minProperties": 6 }
+    }],
     "react/jsx-filename-extension": [0, {
       "extensions": [".js", ".jsx"]
     }]
