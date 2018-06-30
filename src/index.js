@@ -12,7 +12,7 @@ import appReducer from './components/app/reducer';
 
 import './styles/manifest.styl';
 
-const epicMiddleware = createEpicMiddleware(combineEpics());
+const epicMiddleware = createEpicMiddleware();
 
 const history = createHistory();
 const routeMiddleware = routerMiddleware(history);
@@ -26,6 +26,10 @@ const mainStore = createStore(
   }),
   composeEnhancers(applyMiddleware(epicMiddleware, routeMiddleware))
 );
+
+epicMiddleware.run(combineEpics(
+  // epics here
+))
 
 class Root extends Component {
   constructor(props) {
